@@ -1,3 +1,5 @@
+#sender.py
+
 import socket
 import PDU
 import UDT
@@ -32,11 +34,11 @@ def send(sock,filename,IP_PORT,RECEIVER_ADDR):
     packets=[]
     seq_num=0
     while True:
-        data=file.read(512)
+        data=file.read(512)    #data size
         if not data:
             break
-        crc_num=crc16.crc16xmodem(data)
-        pdu=packet.make(seq_num,crc_num,data)
+        crc_num=crc16.crc16xmodem(data)    #calculate crc
+        pdu=packet.make(seq_num,crc_num,data)    #make packet
         packets.append(pdu)
         seq_num+=1
     num_packets = len(packets)
@@ -45,7 +47,7 @@ def send(sock,filename,IP_PORT,RECEIVER_ADDR):
     window_size=200
     next_frame_to_send=0
 
-    #_thread.start_new_thread(receive, (sock,))
+    #start receive ack thread
     THREAD=threading.Thread(target=receive,args=(sock,))
     THREAD.start()
     overtime_flag=0
