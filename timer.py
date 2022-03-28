@@ -1,7 +1,10 @@
+# timer.py
+
 import time
 
 class timer:
     TIMER_STOP=-1
+    #set a timer for every pdu
     _TIMER={}
     
     def __init__(self,_interval):
