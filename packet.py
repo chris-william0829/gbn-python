@@ -1,4 +1,4 @@
-# packet.py - Packet-related functions
+# packet.py
 
 # Creates a packet from a sequence number and byte data
 def make(seq_num, crc_num,data = b''):
